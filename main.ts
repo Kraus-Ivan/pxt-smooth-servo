@@ -52,11 +52,11 @@ namespace smoothServo {
                 this.target = position;
                 let step = speed;
                 if (this.target > this.current) {
-                    for (let i = 0; this.current + step * i < this.target; i++) {
+                    for (let i = 0; this.current + step * i <= this.target; i++) {
                         this.zasobnik.push(this.current + (step * i));
                     }
                 } else {
-                    for (let i = 0; this.current - step * i > this.target; i++) {
+                    for (let i = 0; this.current - step * i >= this.target; i++) {
                         this.zasobnik.push(this.current - (step * i));
                     }
                 }
@@ -73,11 +73,11 @@ namespace smoothServo {
                 this.target = position;
                 let step = steps;
                 if (this.target > fromp) {
-                    for (let i = 0; fromp + step * i < this.target; i++) {
+                    for (let i = 0; fromp + step * i <= this.target; i++) {
                         this.zasobnik.push(fromp + (step * i));
                     }
                 } else {
-                    for (let i = 0; fromp - step * i > this.target; i++) {
+                    for (let i = 0; fromp - step * i >= this.target; i++) {
                         this.zasobnik.push(fromp - (step * i));
                     }
                 }
