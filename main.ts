@@ -67,18 +67,18 @@ namespace smoothServo {
 
         }
                         
-        public void moveTo(from: number, to: number, steps: number = 10){
+        public void moveTo(fromp: number, position: number, steps: number = 10){
              
             if(position < this.max && position > this.min){
                 this.target = position;
                 let step = speed;
-                if (this.target > from) {
-                    for (let i = 0; from + step * i < this.target; i++) {
-                        this.zasobnik.push(from + (step * i));
+                if (this.target > fromp) {
+                    for (let i = 0; fromp + step * i < this.target; i++) {
+                        this.zasobnik.push(fromp + (step * i));
                     }
                 } else {
-                    for (let i = 0; from - step * i > this.target; i++) {
-                        this.zasobnik.push(from - (step * i));
+                    for (let i = 0; fromp - step * i > this.target; i++) {
+                        this.zasobnik.push(fromp - (step * i));
                     }
                 }
                 return 1;
