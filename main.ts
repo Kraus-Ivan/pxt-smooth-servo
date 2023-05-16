@@ -125,5 +125,9 @@ namespace smoothServo {
         public toString(){
             return `smoothServo.SmoothServo Servo v pinu: ${this.pin}; Min: ${this.min}; Max: ${this.max}; Aktuálně v pulsu: ${this.current}; Cíl: ${this.target}; Odebráno: ${-1===SmoothServo.servos.indexOf(this)}; Cestuje: ${this.isMoving()}`;
         }
+
+        public buffer(){
+            return this.zasobnik.join(",");
+        }
     }
 }
