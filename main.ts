@@ -105,8 +105,3 @@ namespace smoothServo {
         }
     }
 }
-
-let i = smoothServo.SmoothServo.createServo(AnalogPin.P1);
-console.log(smoothServo.SmoothServo.servos);
-smoothServo.SmoothServo.removeServo(i);
-console.log(i);
