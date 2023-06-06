@@ -1,6 +1,3 @@
-
-> Open this page at [https://kraus-ivan.github.io/smooth_servo/](https://kraus-ivan.github.io/smooth_servo/)
-
 ## Use as Extension
 
 This repository can be added as an **extension** in MakeCode.
