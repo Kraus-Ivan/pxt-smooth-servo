@@ -1,5 +1,6 @@
 /**
  * Tato knihovna poskytuje třídu SmoothServo, která umožňuje ovládat servo motor na mikrokontroleru micro:bit.
+ * Měla by ovládat servo plynule a netrhaně.
  */
 namespace smoothServo {
 
@@ -19,7 +20,7 @@ namespace smoothServo {
 
         /**
          * Konstruktor třídy SmoothServo.
-         * @param pin Analogový vstup, ke kterému je připojen servo motor.
+         * Je privátní a oužíván pouze metodou createServo().
          */
         private constructor(pin: AnalogPin, min: number, max: number) {
             this.pin = pin;
@@ -32,8 +33,9 @@ namespace smoothServo {
         }
 
         /**
-         * 
+         *
          * Statická metoda vyvářející serva, která je zároveň přidává do seznamu serv.
+         * 
          */
         public static createServo(pin: AnalogPin, min: number = 400, max: number = 2600): SmoothServo {
             let v = new SmoothServo(pin, min, max);
@@ -42,8 +44,8 @@ namespace smoothServo {
         }
 
         /**
-         * Pohne servo motorem na zadanou pozici.
-         * @param position Pozice, na kterou se má servo motor posunout (v rozsahu od 0 do 180).
+         * Naplní zásobník serva instrukcemi jak se pohnout na dannou pozici.
+         * @param position Pozice, na kterou se má servo motor posunout (v rozsahu this.min až this.max)
          * @param speed Rychlost pohybu motoru (v rozsahu od 1 do 100).
          * @returns Vrací číslo 1 pokud úspěšně naplnil zásobník, číslo -1 pokud byla zadána chybné {@link position}.
          */
@@ -66,7 +68,10 @@ namespace smoothServo {
             }
 
         }
-                        
+         
+        /**
+        * Obdoba metody moveTo(), akorát zde se vybírá i odkud se servo má hýbat.
+        */
         public moveToFrom(fromp: number, position: number, steps: number = 10){
              
             if(position < this.max && position > this.min){
@@ -90,7 +95,7 @@ namespace smoothServo {
         }
 
         /**
-         * Aktualizuje pozice všech motorů. Je doporučeno volat tuto funkci ve forever loopu a to ve frekvenci maximálně 50Hz.
+         * Aktualizuje pozice všech serv v poli this.servos. Je doporučeno volat tuto funkci ve forever loopu a to ve frekvenci maximálně 50Hz.
          */
         public static update() {
             for(let s of this.servos){
@@ -120,12 +125,15 @@ namespace smoothServo {
         }
 
         /**
-         * @returns Podrobnosti o servu.
+         * @returns Podrobnosti o servu v textovém řetězci.
          */
         public toString(){
             return `smoothServo.SmoothServo Servo v pinu: ${this.pin}; Min: ${this.min}; Max: ${this.max}; Aktuálně v pulsu: ${this.current}; Cíl: ${this.target}; Odebráno: ${-1===SmoothServo.servos.indexOf(this)}; Cestuje: ${this.isMoving()}`;
         }
 
+        /**
+        * @returns Hodnoty v zásobníku serva jakožto textový řetězec.
+        */
         public buffer(){
             return this.zasobnik.join(",");
         }
